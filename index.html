@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do-List</title>
+
+    <link rel="stylesheet" href="index.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <link rel="icon" href="assets/check-mark-circle-svgrepo-com.svg">
+</head>
+<body>
+    <header>
+        <h1>To-Do-List</h1>
+    </header>
+
+    <main>
+        <div class="top-container">
+            <div class="input-row">
+                <input type="text" required placeholder="task" id="input-el">
+                <button id="add-btn">add</button>
+            </div>
+            <button id="clear-btn">clear all</button>
+            
+        </div>
+
+        <div class="tasks-container" id="tasks-container">
+            <span id="task-el">
+                
+            </span>
+        </div>
+    </main>
+
+    <script src="index.js"></script>
+</body>
+</html>
