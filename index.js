@@ -31,6 +31,7 @@ addBtn.addEventListener("click", function() {
     }
     
     render(tasks)
+    inputEl.value = ""
 })
 
 clearBtn.addEventListener("click", function() {
