@@ -24,9 +24,13 @@ function render(task) {
 }
 
 addBtn.addEventListener("click", function() {
-    tasks.push(inputEl.value)
+    if (inputEl.value === "") {
+        return 
+    }else {
+        tasks.push(inputEl.value)
+    }
+    
     render(tasks)
-    inputEl.value = ""
 })
 
 clearBtn.addEventListener("click", function() {
