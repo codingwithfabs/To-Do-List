@@ -1,21 +1,21 @@
 const inputEl = document.getElementById("input-el")
 const addBtn = document.getElementById("add-btn")
 const clearBtn = document.getElementById("clear-btn")
-
-const task = document.getElementById("task")
 const taskCont = document.getElementById("tasks-container")
 
 let tasks = []
 
-function render(task) {
+function render(taskArray) {
     let taskItems = ""
-    for (let i = 0; i < task.length; i++) {
+    for (let i = 0; i < taskArray.length; i++) {
+        const completedClass = taskArray[i].isCompleted ? "completed" : ""
+        
         taskItems += `
-            <div class="task" id="task">
-                <span id="task-el">${task[i]}</span>
+            <div class="task">
+                <span class="${completedClass}">${taskArray[i].text}</span>
                 <div class="task-icons">
-                    <i class="fa-regular fa-square-check" id="done-icon"></i>
-                    <i class="fa-regular fa-trash-can" id="delete-icon" data-index="${i}"></i>
+                    <i class="fa-regular fa-square-check" data-index="${i}"></i>
+                    <i class="fa-regular fa-trash-can" data-index="${i}"></i>
                 </div>
             </div>    
         `
@@ -24,11 +24,12 @@ function render(task) {
 }
 
 addBtn.addEventListener("click", function() {
-    if (inputEl.value === "") {
-        return 
-    }else {
-        tasks.push(inputEl.value)
-    }
+    if (inputEl.value === "") return 
+
+    tasks.push({
+        text: inputEl.value,
+        isCompleted: false
+    })
     
     render(tasks)
     inputEl.value = ""
@@ -40,29 +41,15 @@ clearBtn.addEventListener("click", function() {
 })
 
 taskCont.addEventListener("click", function(e) {
-    // 1. Check if the click was on the checkmark icon
+    const index = e.target.dataset.index
+    
     if (e.target.classList.contains("fa-square-check")) {
-        
-        // 2. Find the specific .task div that contains this icon
-        const parentTask = e.target.closest(".task")
-        
-        // 3. Find the span inside ONLY that specific task div
-        const spanEl = parentTask.querySelector("span")
-        
-        // 4. Toggle the line-through
-        if (spanEl.style.textDecoration === "line-through") {
-            spanEl.style.textDecoration = "none"
-        } else {
-            spanEl.style.textDecoration = "line-through"
-        }
+        tasks[index].isCompleted = !tasks[index].isCompleted
+        render(tasks)
     }
 
     if (e.target.classList.contains("fa-trash-can")) {
-        const index = e.target.dataset.index
-
         tasks.splice(index, 1)
-
         render(tasks)
-    }
+    }   
 })
-
